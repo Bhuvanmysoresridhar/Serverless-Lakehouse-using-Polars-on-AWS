@@ -1,0 +1,1 @@
+{"errorMessage": "'DataFrame' object has no attribute 'groupby'", "errorType": "AttributeError", "requestId": "0d5e1434-43f8-4c37-9942-3db096433d86", "stackTrace": ["  File \"/var/task/silver_to_gold.py\", line 39, in handler\n    full_df\n"]}
