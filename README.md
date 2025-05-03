@@ -33,17 +33,7 @@ We implement a classic **Bronze → Silver → Gold** data pipeline without usin
 
 ## Folder Structure
 
-lambda_container/            # Bronze → Silver container
-    process.py               # Transformation script
-    Dockerfile               # Builds Lambda image with Polars
-lambda_gold/                 # Silver → Gold container
-    silver_to_gold.py        # Aggregation logic
-    Dockerfile               # Uses Polars + DuckDB
-lakehouse_cdk/               # CDK stack definition
-    lakehouse_cdk_stack.py   # Main infrastructure logic
-requirements.txt             # Python dependencies
-cdk.json                     # CDK config
-README.md                    # This file
+<pre> <code> ``` lambda_container/ # Bronze → Silver container process.py # Transformation script Dockerfile # Builds Lambda image with Polars lambda_gold/ # Silver → Gold container silver_to_gold.py # Aggregation logic Dockerfile # Uses Polars + DuckDB lakehouse_cdk/ # CDK stack definition lakehouse_cdk_stack.py # Main infrastructure logic requirements.txt # Python dependencies cdk.json # CDK config README.md # This file ``` </code> </pre>
 
 
 ## Setup Instructions
