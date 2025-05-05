@@ -2,7 +2,7 @@
 FROM --platform=linux/amd64 public.ecr.aws/lambda/python:3.9
 
 # Install Polars and DuckDB
-RUN pip install polars duckdb -t /var/task/
+RUN pip install polars duckdb deltalake -t /var/task/
 
 # Copy your gold transformation script
 COPY silver_to_gold.py ${LAMBDA_TASK_ROOT}

@@ -2,6 +2,7 @@ import boto3
 import polars as pl
 import os
 import io
+from deltalake.writer import write_deltalake
 
 s3 = boto3.client('s3')
 
@@ -23,27 +24,25 @@ def handler(event, context):
             print("Original Data:")
             print(df.head())
 
-            filtered_df = (
-                           df.filter((pl.col("amount") > 200) &
-                                    (pl.col("customer_id").is_not_null()) &
-                                    (pl.col("order_date").str.len_chars() > 0)
-                                )
-                            )
-
-
-            # Write to CSV in memory
-            csv_buffer = io.StringIO()
-            filtered_df.write_csv(csv_buffer)
-
-            # Create silver key path
-            silver_key = s3_key.replace("bronze/", "silver/").replace(".json", ".csv")
-            s3.put_object(
-                Bucket=silver_bucket,
-                Key=silver_key,
-                Body=csv_buffer.getvalue()
+            # Apply data quality filters
+            filtered_df = df.filter(
+                (pl.col("amount") > 200) &
+                (pl.col("customer_id").is_not_null()) &
+                (pl.col("order_date").str.len_chars() > 0)
             )
 
-            print(f"Written to {silver_bucket}/{silver_key}")
+            print("Filtered DataFrame:")
+            print(filtered_df.head())
+
+
+            #  Write Delta to Silver S3 path
+            write_deltalake(
+                f"s3://{silver_bucket}/silver_table/",
+                filtered_df,
+                mode="append"
+            )
+
+            print("Delta write complete for Silver layer")
 
         except Exception as e:
             print(f"Error processing {s3_key}: {e}")
