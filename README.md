@@ -1,5 +1,5 @@
 
-# Serverless Lakehouse on AWS using CDK, Polars
+# Serverless Lakehouse on AWS using CDK, Polars,Duckdb and Delta-rs
 
 ## Overview
 This project demonstrates how to build a fully **serverless lakehouse** architecture on AWS using:
