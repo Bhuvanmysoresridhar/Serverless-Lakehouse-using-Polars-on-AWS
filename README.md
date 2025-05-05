@@ -26,7 +26,7 @@ We implement a classic **Bronze → Silver → Gold** data pipeline without usin
 - **AWS Services**: S3, Lambda, IAM, Kinesis Firehose, EventBridge, CloudWatch, ECR
 - **Compute**: Docker + Lambda Containers
 - **Transformation Libraries**: Polars (faster than Pandas), DuckDB (in-memory SQL)
-- **Storage Format**: CSV → Easily extendable to Delta
+- **Storage Format**: delta lake (we store the data as delta tables)
 - **Visualization**: Power BI or AWS Athena (optional)
 
 ---
