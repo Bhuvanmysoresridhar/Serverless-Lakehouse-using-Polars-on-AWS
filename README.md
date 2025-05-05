@@ -9,15 +9,15 @@ This project demonstrates how to build a fully **serverless lakehouse** architec
 - **Polars** and **DuckDB** for fast in-memory data processing
 - **Amazon S3** as the data lake storage
 
-We implement a classic **Bronze → Silver → Gold** data pipeline without using Apache Spark or Delta Lake (delta-rs). Instead, CSV files are used at each layer, making this lightweight and simple to manage.
+We implement a classic **Bronze → Silver → Gold** data pipeline without using Apache Spark. And we have used delta lake to store the data in the form of delta tables.
 
 ---
 
 ## Architecture
 
 - **Bronze Layer**: Raw `.json` records are pushed to S3 via Kinesis Firehose.
-- **Silver Layer**: A Lambda container reads `.json` from Bronze, validates/cleans data using Polars, and writes `.csv` to Silver.
-- **Gold Layer**: Another Lambda container (triggered by EventBridge every 15 min) aggregates Silver data using Polars and DuckDB and writes output to Gold in `.csv`.
+- **Silver Layer**: A Lambda container reads `.json` from Bronze, validates/cleans data using Polars, and writes delta tables to Silver.
+- **Gold Layer**: Another Lambda container (triggered by EventBridge every 15 min) aggregates Silver data using Polars and DuckDB and writes output to Gold as delta tables.
 
 ---
 
