@@ -26,4 +26,4 @@ with open('big_5000_records.json', 'w') as f:
     for record in records:
         f.write(json.dumps(record) + '\n')
 
-print("✅ Done: 5000+ records created in big_5000_records.json")
+print(" Done: 5000+ records created in big_5000_records.json")
